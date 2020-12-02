@@ -5,7 +5,6 @@ public class SecondProg {
     {
         Scanner in = new Scanner(System.in);
 
-
         System.out.println("1: ");
         String str1 = in.next();
         int a1 = in.nextInt();
@@ -55,7 +54,6 @@ public class SecondProg {
         String str8_2 = in.next();
         isStrangePair(str8_1,str8_2);
 
-
         System.out.println("9: ");
         String str9_1 = in.next();
         String str9_2 = in.next();
@@ -67,6 +65,10 @@ public class SecondProg {
         {
             isPrefix(str9_1,str9_2);
         }
+
+        System.out.println("10: ");
+        int k10 = in.nextInt();
+        boxSeq(k10);
     }
 
     public static void repeat(String str, int a)
@@ -192,28 +194,21 @@ public class SecondProg {
             System.out.println("false");
         }
     }
-
-    public static void isSuffix (String str1, String str2)
+    public static void isPrefix(String word, String prefix)
     {
-        int k=0;
-        for(int i=1; i<str2.length();i++)
-        {
-            while (str1.charAt(i-1)==str2.charAt(i))
-            {
-                return;
-            }
-            if (i==str2.length())
-            {
-                System.out.println("true");
-            }
-            else
-            {
-                System.out.println("false");
-            }
-        }
+        System.out.println(word.startsWith(prefix.substring(0, prefix.length()-1)));
     }
-    public static void isPrefix (String str1, String str2)
-    {
 
+    public static void isSuffix(String word, String suffix)
+    {
+        System.out.println(word.endsWith(suffix.substring(1, suffix.length())));
+    }
+
+    public static void boxSeq(int k)
+    {
+        if (k % 2 == 0)
+            System.out.println(k);
+        else
+            System.out.println(k + 2);
     }
 }
