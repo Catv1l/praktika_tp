@@ -8,7 +8,7 @@ public class ThirdProg {
     public static void main(String[] args)
     {
         Scanner in = new Scanner(System.in);
-/*
+
         System.out.print("1: ");
         int k1_1 = in.nextInt();
         int k1_2 = in.nextInt();
@@ -62,7 +62,6 @@ public class ThirdProg {
         int k9 = in.nextInt();
         nextPrime(k9);
 
- */
         System.out.print("10: ");
         int a10 = in.nextInt();
         int b10 = in.nextInt();
