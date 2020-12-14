@@ -1,3 +1,6 @@
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,10 +14,9 @@ public class FifthProg {
         System.out.println("5:"); for (int i=0;i<3;i++) z5();
         System.out.println("6:"); for (int i=0;i<2;i++) z6();
         System.out.println("7:"); for (int i=0;i<4;i++) z7();
-
-        //System.out.println("8:"); for (int i=0;i<4;i++) z8();
-        //System.out.println("9:"); for (int i=0;i<4;i++) z9();
-        //System.out.println("10:"); for (int i=0;i<3;i++) z10();
+        System.out.println("8:"); for (int i=0;i<3;i++) z8();
+        System.out.println("9:"); for (int i=0;i<4;i++) z9();
+        System.out.println("10:"); for (int i=0;i<4;i++) z10();
     }
 
 
@@ -285,8 +287,79 @@ public class FifthProg {
     }
     public static void getSha256Hash(String str)
     {
-
+        byte[] bytes = null;
+        try
+        {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            bytes = md.digest(str.getBytes(StandardCharsets.UTF_8));
+        }
+        catch(Exception e) {};
+        BigInteger number = new BigInteger(1, bytes);
+        StringBuilder result = new StringBuilder(number.toString(16));
+        while (result.length() < 32)
+        {
+            result.insert(0, '0');
+        }
+        System.out.println(result.toString());
     }
-    public static void z9(){}
-    public static void z10(){}
+    public static void z9(){
+        String str = in.nextLine();
+        correctionTitle(str);
+    }
+    public static void correctionTitle(String str){
+        str = str.toLowerCase();
+        String[] words = str.split(" ");
+        for( int i=0; i< words.length;i++) {
+            if (!(words[i].contentEquals("and") || words[i].contentEquals("the")
+                    || words[i].contentEquals("of") || words[i].contentEquals("in")))
+            {
+                words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1);
+            }
+        }
+        System.out.println(String.join(" ", words));
+    }
+    public static void z10(){
+        int n = in.nextInt();
+        hexLattice(n);
+    }
+    public static void hexLattice(int n){
+        int k = 1;
+        String res="";
+        while((3 * k * (k - 1) + 1) < n)
+        {
+            k++;
+        }
+        if (3 * k * (k - 1) + 1==n)
+        {
+            int strs= k*2-1;
+            for (int str=0; str<strs/2;str++)
+            {
+                String line="";
+                for (int i = 0; i < k - str; i++)
+                    line += " ";
+                for (int cell = 0; cell < k + str; cell++)
+                    line += "o ";
+                for (int i = 0; i < k - str -1; i++)
+                    line += " ";
+                line+="\n";
+                res+=line;
+            }
+            for (int str = strs / 2; str < strs; str++)
+            {
+                String line = "";
+                for (int i = 0; i < k - (strs - str) + 1; i++)
+                    line += " ";
+                for (int cell = 0; cell < k + (strs - str) - 1; cell++)
+                    line += "o ";
+                for (int i = 0; i < k - (strs - str); i++)
+                    line += " ";
+                line += "\n";
+                res += line;
+            }
+        }
+        else{
+            res="Invalid";
+        }
+        System.out.println(res);
+    }
 }
